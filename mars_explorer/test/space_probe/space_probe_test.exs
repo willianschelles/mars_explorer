@@ -17,6 +17,11 @@ defmodule MarsExplorer.SpaceProbeTest do
   end
 
   describe "run/2" do
+    test "returns unknown_command when command isn't L, R or M" do
+      space_probe = %SpaceProbe{}
+      assert :unknown_command = SpaceProbe.run("Move", space_probe)
+    end
+
     ## Left command tests
     test "turns to West when direction is North and command is L" do
       initial_direction = "N"
@@ -99,7 +104,7 @@ defmodule MarsExplorer.SpaceProbeTest do
                SpaceProbe.run(command, space_probe)
     end
 
-    ## Move command test
+    ## Move command tests
     test "moves to y+1 position when direction is North" do
       space_probe = %SpaceProbe{x: 0, y: 0, direction: "N"}
       command = "M"

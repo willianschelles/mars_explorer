@@ -39,6 +39,8 @@ defmodule MarsExplorer.SpaceProbe do
     move(space_probe)
   end
 
+  def run(_unknown_command, _space_probe), do: :unknown_command
+
   defp move(%MarsExplorer.SpaceProbe{x: _, y: y, direction: "N"} = space_probe),
     do: %MarsExplorer.SpaceProbe{space_probe | y: y + 1}
 

@@ -9,13 +9,6 @@ defmodule MarsExplorer.SpaceProbe do
         }
   defstruct [:x, :y, :direction]
 
-  @left_directions %{
-    "N" => "W",
-    "W" => "S",
-    "S" => "E",
-    "E" => "N"
-  }
-
   @spec run(String.t(), %MarsExplorer.SpaceProbe{}) :: %MarsExplorer.SpaceProbe{}
   def run(command, space_probe)
 
@@ -24,5 +17,24 @@ defmodule MarsExplorer.SpaceProbe do
     %MarsExplorer.SpaceProbe{space_probe | direction: new_direction}
   end
 
+  def run("R", %MarsExplorer.SpaceProbe{} = space_probe) do
+    new_direction = turn_to_right(space_probe.direction)
+    %MarsExplorer.SpaceProbe{space_probe | direction: new_direction}
+  end
+
+  @left_directions %{
+    "N" => "W",
+    "W" => "S",
+    "S" => "E",
+    "E" => "N"
+  }
   defp turn_to_left(direction), do: @left_directions[direction]
+
+  @right_directions %{
+    "N" => "E",
+    "E" => "S",
+    "S" => "W",
+    "W" => "N"
+  }
+  defp turn_to_right(direction), do: @right_directions[direction]
 end

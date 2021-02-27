@@ -15,11 +15,43 @@ defmodule MarsExplorer.SpaceProbeTest do
   end
 
   test "turns to West when direction is North and command is L" do
-    space_probe = %SpaceProbe{x: 0, y: 0, direction: "N"}
+    initial_direction = "N"
+    space_probe = %SpaceProbe{x: 0, y: 0, direction: initial_direction}
     command = "L"
     expected_direction = "W"
 
     assert %SpaceProbe{x: 0, y: 0, direction: ^expected_direction} =
              SpaceProbe.run(command, space_probe)
   end
+  test "turns to South when direction is West and command is L" do
+    initial_direction = "W"
+    space_probe = %SpaceProbe{x: 0, y: 0, direction: initial_direction}
+    command = "L"
+    expected_direction = "S"
+
+    assert %SpaceProbe{x: 0, y: 0, direction: ^expected_direction} =
+             SpaceProbe.run(command, space_probe)
+  end
+
+  test "turns to East when direction is South and command is L" do
+    initial_direction = "S"
+    space_probe = %SpaceProbe{x: 0, y: 0, direction: initial_direction}
+    command = "L"
+    expected_direction = "E"
+
+    assert %SpaceProbe{x: 0, y: 0, direction: ^expected_direction} =
+             SpaceProbe.run(command, space_probe)
+  end
+
+  test "turns to North when direction is East and command is L" do
+    initial_direction = "E"
+    space_probe = %SpaceProbe{x: 0, y: 0, direction: initial_direction}
+    command = "L"
+    expected_direction = "N"
+
+    assert %SpaceProbe{x: 0, y: 0, direction: ^expected_direction} =
+             SpaceProbe.run(command, space_probe)
+  end
+
+
 end

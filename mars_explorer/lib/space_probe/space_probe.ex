@@ -5,22 +5,9 @@ defmodule MarsExplorer.SpaceProbe do
   @type t :: %__MODULE__{
           x: integer(),
           y: integer(),
-          direction: string()
+          direction: String.t()
         }
   defstruct [:x, :y, :direction]
-
-  @spec run(String.t(), %MarsExplorer.SpaceProbe{}) :: %MarsExplorer.SpaceProbe{}
-  def run(command, space_probe)
-
-  def run("L", %MarsExplorer.SpaceProbe{} = space_probe) do
-    new_direction = turn_to_left(space_probe.direction)
-    %MarsExplorer.SpaceProbe{space_probe | direction: new_direction}
-  end
-
-  def run("R", %MarsExplorer.SpaceProbe{} = space_probe) do
-    new_direction = turn_to_right(space_probe.direction)
-    %MarsExplorer.SpaceProbe{space_probe | direction: new_direction}
-  end
 
   @left_directions %{
     "N" => "W",
@@ -28,7 +15,6 @@ defmodule MarsExplorer.SpaceProbe do
     "S" => "E",
     "E" => "N"
   }
-  defp turn_to_left(direction), do: @left_directions[direction]
 
   @right_directions %{
     "N" => "E",
@@ -36,5 +22,32 @@ defmodule MarsExplorer.SpaceProbe do
     "S" => "W",
     "W" => "N"
   }
-  defp turn_to_right(direction), do: @right_directions[direction]
+  @spec run(String.t(), %MarsExplorer.SpaceProbe{}) :: %MarsExplorer.SpaceProbe{}
+  def run(command, space_probe)
+
+  def run("L", %MarsExplorer.SpaceProbe{} = space_probe) do
+    new_direction = @left_directions[space_probe.direction]
+    %MarsExplorer.SpaceProbe{space_probe | direction: new_direction}
+  end
+
+  def run("R", %MarsExplorer.SpaceProbe{} = space_probe) do
+    new_direction = @right_directions[space_probe.direction]
+    %MarsExplorer.SpaceProbe{space_probe | direction: new_direction}
+  end
+
+  def run("M", %MarsExplorer.SpaceProbe{} = space_probe) do
+    move(space_probe)
+  end
+
+  defp move(%MarsExplorer.SpaceProbe{x: _, y: y, direction: "N"} = space_probe),
+    do: %MarsExplorer.SpaceProbe{space_probe | y: y + 1}
+
+  defp move(%MarsExplorer.SpaceProbe{x: _, y: y, direction: "S"} = space_probe),
+    do: %MarsExplorer.SpaceProbe{space_probe | y: y - 1}
+
+  defp move(%MarsExplorer.SpaceProbe{x: x, y: _, direction: "E"} = space_probe),
+    do: %MarsExplorer.SpaceProbe{space_probe | x: x + 1}
+
+  defp move(%MarsExplorer.SpaceProbe{x: x, y: _, direction: "W"} = space_probe),
+    do: %MarsExplorer.SpaceProbe{space_probe | x: x - 1}
 end

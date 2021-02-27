@@ -98,5 +98,43 @@ defmodule MarsExplorer.SpaceProbeTest do
       assert %SpaceProbe{x: _, y: _, direction: ^expected_direction} =
                SpaceProbe.run(command, space_probe)
     end
+
+    ## Move command test
+    test "moves to y+1 position when direction is North" do
+      space_probe = %SpaceProbe{x: 0, y: 0, direction: "N"}
+      command = "M"
+
+      expected_y_coordinate = 1
+
+      assert %SpaceProbe{x: _, y: ^expected_y_coordinate, direction: "N"} =
+               SpaceProbe.run(command, space_probe)
+    end
+
+    test "moves to y-1 position when direction is South" do
+      space_probe = %SpaceProbe{x: 0, y: 1, direction: "S"}
+      command = "M"
+      expected_y_coordinate = 0
+
+      assert %SpaceProbe{x: _, y: ^expected_y_coordinate, direction: "S"} =
+               SpaceProbe.run(command, space_probe)
+    end
+
+    test "moves to x+1 position when direction is East" do
+      space_probe = %SpaceProbe{x: 0, y: 0, direction: "E"}
+      command = "M"
+      expected_x_coordinate = 1
+
+      assert %SpaceProbe{x: ^expected_x_coordinate, y: _, direction: "E"} =
+               SpaceProbe.run(command, space_probe)
+    end
+
+    test "moves to x-1 position when direction is West" do
+      space_probe = %SpaceProbe{x: 1, y: 0, direction: "W"}
+      command = "M"
+      expected_x_coordinate = 0
+
+      assert %SpaceProbe{x: ^expected_x_coordinate, y: _, direction: "W"} =
+               SpaceProbe.run(command, space_probe)
+    end
   end
 end

@@ -1,6 +1,18 @@
 # MarsExplorer
 
-**TODO: Add description**
+This project is about exploring Mars by controlling a probe that moves over an NxN mesh.
+
+To run MarsExplorar program, we can:
+
+  1 - Enter in iex (Elixir's interactive shell) by typing on Terminal: `iex` an then run:
+
+    iex> MarsExplorer.initialize_mars_rover("instructions.txt")
+
+    where, "instructions.txt" is a set of instructions telling how Mars Rover should explores Mars plateau.
+
+
+  2 - Executing a test suite from ExUnit, calling `mix test` from the root of project.
+
 
 ## Installation
 

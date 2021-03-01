@@ -33,4 +33,16 @@ defmodule MarsExplorerTest do
       end
     end
   end
+
+  describe "initialize_mars_rover/1" do
+    test "parses input given file, explores Mars and write Mars Rover final positions in File" do
+
+      final_positions_txt = "final_positions.txt"
+      File.rm(final_positions_txt)
+
+      assert {:error, _no_file} = File.read(final_positions_txt)
+      assert :ok == MarsExplorer.initialize_mars_rover("instructions.txt")
+      assert "1 3 N\n5 1 E\n" == File.read!(final_positions_txt)
+    end
+  end
 end

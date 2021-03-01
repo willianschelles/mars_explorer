@@ -12,7 +12,7 @@ defmodule MarsExplorer do
   and tell to mars rover explores the plateu and write the output in file.
   ## Examples
 
-      iex> MarsExplorer.initialize_mars_rover("path_file.txt")
+      iex> MarsExplorer.initialize_mars_rover("instructions.txt")
       :ok
 
   """

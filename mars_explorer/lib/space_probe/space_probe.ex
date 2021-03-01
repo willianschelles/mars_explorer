@@ -1,4 +1,4 @@
-defmodule MarsExplorer.SpaceProbe.Command do
+defmodule MarsExplorer.MarsRover.Command do
   @moduledoc """
   Struct that defines the known commands.
   """
@@ -6,7 +6,7 @@ defmodule MarsExplorer.SpaceProbe.Command do
   defstruct command: "L" || "R" || "M"
 end
 
-defmodule MarsExplorer.SpaceProbe do
+defmodule MarsExplorer.MarsRover do
   @moduledoc """
   Struct that represents a space probe.
   """
@@ -30,42 +30,42 @@ defmodule MarsExplorer.SpaceProbe do
     "S" => "W",
     "W" => "N"
   }
-  @spec run(%MarsExplorer.SpaceProbe.Command{}, %MarsExplorer.SpaceProbe{}, integer()) ::
-          %MarsExplorer.SpaceProbe{}
-  def run(command, space_probe, mesh_size)
+  @spec run(%MarsExplorer.MarsRover.Command{}, %MarsExplorer.MarsRover{}, integer()) ::
+          %MarsExplorer.MarsRover{}
+  def run(command, mars_rover, mesh_size)
 
-  def run("L", %MarsExplorer.SpaceProbe{} = space_probe, _mesh_size) do
-    new_direction = @left_directions[space_probe.direction]
-    %MarsExplorer.SpaceProbe{space_probe | direction: new_direction}
+  def run("L", %MarsExplorer.MarsRover{} = mars_rover, _mesh_size) do
+    new_direction = @left_directions[mars_rover.direction]
+    %MarsExplorer.MarsRover{mars_rover | direction: new_direction}
   end
 
-  def run("R", %MarsExplorer.SpaceProbe{} = space_probe, _mesh_size) do
-    new_direction = @right_directions[space_probe.direction]
-    %MarsExplorer.SpaceProbe{space_probe | direction: new_direction}
+  def run("R", %MarsExplorer.MarsRover{} = mars_rover, _mesh_size) do
+    new_direction = @right_directions[mars_rover.direction]
+    %MarsExplorer.MarsRover{mars_rover | direction: new_direction}
   end
 
-  def run("M", %MarsExplorer.SpaceProbe{} = space_probe, mesh_size) do
-    if can_move?(space_probe, mesh_size),
-      do: move(space_probe),
+  def run("M", %MarsExplorer.MarsRover{} = mars_rover, mesh_size) do
+    if can_move?(mars_rover, mesh_size),
+      do: move(mars_rover),
       else: raise("Cannot be moved. Out of bound")
   end
 
-  def run(_unknown_command, _space_probe, _mesh_size), do: :unknown_command
+  def run(_unknown_command, _mars_rover, _mesh_size), do: :unknown_command
 
-  defp can_move?(space_probe, mesh_size) do
-    space_probe.x >= 0 and space_probe.x < mesh_size and space_probe.y >= 0 and
-      space_probe.y < mesh_size
+  defp can_move?(mars_rover, mesh_size) do
+    mars_rover.x >= 0 and mars_rover.x <= mesh_size and mars_rover.y >= 0 and
+      mars_rover.y <= mesh_size
   end
 
-  defp move(%MarsExplorer.SpaceProbe{x: _, y: y, direction: "N"} = space_probe),
-    do: %MarsExplorer.SpaceProbe{space_probe | y: y + 1}
+  defp move(%MarsExplorer.MarsRover{x: _, y: y, direction: "N"} = mars_rover),
+    do: %MarsExplorer.MarsRover{mars_rover | y: y + 1}
 
-  defp move(%MarsExplorer.SpaceProbe{x: _, y: y, direction: "S"} = space_probe),
-    do: %MarsExplorer.SpaceProbe{space_probe | y: y - 1}
+  defp move(%MarsExplorer.MarsRover{x: _, y: y, direction: "S"} = mars_rover),
+    do: %MarsExplorer.MarsRover{mars_rover | y: y - 1}
 
-  defp move(%MarsExplorer.SpaceProbe{x: x, y: _, direction: "E"} = space_probe),
-    do: %MarsExplorer.SpaceProbe{space_probe | x: x + 1}
+  defp move(%MarsExplorer.MarsRover{x: x, y: _, direction: "E"} = mars_rover),
+    do: %MarsExplorer.MarsRover{mars_rover | x: x + 1}
 
-  defp move(%MarsExplorer.SpaceProbe{x: x, y: _, direction: "W"} = space_probe),
-    do: %MarsExplorer.SpaceProbe{space_probe | x: x - 1}
+  defp move(%MarsExplorer.MarsRover{x: x, y: _, direction: "W"} = mars_rover),
+    do: %MarsExplorer.MarsRover{mars_rover | x: x - 1}
 end

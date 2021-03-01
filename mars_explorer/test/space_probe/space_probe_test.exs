@@ -19,7 +19,7 @@ defmodule MarsExplorer.SpaceProbeTest do
   describe "run/2" do
     test "returns unknown_command when command isn't L, R or M" do
       space_probe = %SpaceProbe{}
-      assert :unknown_command = SpaceProbe.run("Move", space_probe)
+      assert :unknown_command = SpaceProbe.run("Move", space_probe, 5)
     end
 
     ## Left command tests
@@ -30,7 +30,7 @@ defmodule MarsExplorer.SpaceProbeTest do
       expected_direction = "W"
 
       assert %SpaceProbe{x: _, y: _, direction: ^expected_direction} =
-               SpaceProbe.run(command, space_probe)
+               SpaceProbe.run(command, space_probe, 5)
     end
 
     test "turns to South when direction is West and command is L" do
@@ -40,7 +40,7 @@ defmodule MarsExplorer.SpaceProbeTest do
       expected_direction = "S"
 
       assert %SpaceProbe{x: _, y: _, direction: ^expected_direction} =
-               SpaceProbe.run(command, space_probe)
+               SpaceProbe.run(command, space_probe, 5)
     end
 
     test "turns to East when direction is South and command is L" do
@@ -50,7 +50,7 @@ defmodule MarsExplorer.SpaceProbeTest do
       expected_direction = "E"
 
       assert %SpaceProbe{x: _, y: _, direction: ^expected_direction} =
-               SpaceProbe.run(command, space_probe)
+               SpaceProbe.run(command, space_probe, 5)
     end
 
     test "turns to North when direction is East and command is L" do
@@ -60,7 +60,7 @@ defmodule MarsExplorer.SpaceProbeTest do
       expected_direction = "N"
 
       assert %SpaceProbe{x: _, y: _, direction: ^expected_direction} =
-               SpaceProbe.run(command, space_probe)
+               SpaceProbe.run(command, space_probe, 5)
     end
 
     ## Right command tests
@@ -71,7 +71,7 @@ defmodule MarsExplorer.SpaceProbeTest do
       expected_direction = "E"
 
       assert %SpaceProbe{x: _, y: _, direction: ^expected_direction} =
-               SpaceProbe.run(command, space_probe)
+               SpaceProbe.run(command, space_probe, 5)
     end
 
     test "turns to South when direction is East and command is R" do
@@ -81,7 +81,7 @@ defmodule MarsExplorer.SpaceProbeTest do
       expected_direction = "S"
 
       assert %SpaceProbe{x: _, y: _, direction: ^expected_direction} =
-               SpaceProbe.run(command, space_probe)
+               SpaceProbe.run(command, space_probe, 5)
     end
 
     test "turns to West when direction is South and command is R" do
@@ -91,7 +91,7 @@ defmodule MarsExplorer.SpaceProbeTest do
       expected_direction = "W"
 
       assert %SpaceProbe{x: _, y: _, direction: ^expected_direction} =
-               SpaceProbe.run(command, space_probe)
+               SpaceProbe.run(command, space_probe, 5)
     end
 
     test "turns to North when direction is West and command is R" do
@@ -101,7 +101,7 @@ defmodule MarsExplorer.SpaceProbeTest do
       expected_direction = "N"
 
       assert %SpaceProbe{x: _, y: _, direction: ^expected_direction} =
-               SpaceProbe.run(command, space_probe)
+               SpaceProbe.run(command, space_probe, 5)
     end
 
     ## Move command tests
@@ -112,7 +112,7 @@ defmodule MarsExplorer.SpaceProbeTest do
       expected_y_coordinate = 1
 
       assert %SpaceProbe{x: _, y: ^expected_y_coordinate, direction: "N"} =
-               SpaceProbe.run(command, space_probe)
+               SpaceProbe.run(command, space_probe, 5)
     end
 
     test "moves to y-1 position when direction is South" do
@@ -121,7 +121,7 @@ defmodule MarsExplorer.SpaceProbeTest do
       expected_y_coordinate = 0
 
       assert %SpaceProbe{x: _, y: ^expected_y_coordinate, direction: "S"} =
-               SpaceProbe.run(command, space_probe)
+               SpaceProbe.run(command, space_probe, 5)
     end
 
     test "moves to x+1 position when direction is East" do
@@ -130,7 +130,7 @@ defmodule MarsExplorer.SpaceProbeTest do
       expected_x_coordinate = 1
 
       assert %SpaceProbe{x: ^expected_x_coordinate, y: _, direction: "E"} =
-               SpaceProbe.run(command, space_probe)
+               SpaceProbe.run(command, space_probe, 5)
     end
 
     test "moves to x-1 position when direction is West" do
@@ -139,7 +139,7 @@ defmodule MarsExplorer.SpaceProbeTest do
       expected_x_coordinate = 0
 
       assert %SpaceProbe{x: ^expected_x_coordinate, y: _, direction: "W"} =
-               SpaceProbe.run(command, space_probe)
+               SpaceProbe.run(command, space_probe, 5)
     end
   end
 end

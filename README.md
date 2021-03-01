@@ -4,7 +4,10 @@ This project is about exploring Mars by controlling a probe that moves over an N
 
 To run MarsExplorar program, we can:
 
-  1 - Enter in iex (Elixir's interactive shell) by typing on Terminal: `iex` an then run:
+  1 - Enter in iex (Elixir's interactive shell) by typing on Terminal: 
+   `iex -S mix` 
+   
+   and then run:
 
     iex> MarsExplorer.initialize_mars_rover("instructions.txt")
 
